@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5x@rvhvbm7+j+jq62fb6746tcmnke7_bh=tn@h&8dp23(gudwd
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+# https://todo-app-backend-xcfq.onrender.com
 
 # Application definition
 

@@ -7,9 +7,10 @@ routers = DefaultRouter()
 routers.register('tasks', TaskViewSet)
 
 
-# urlpatterns = [
-#     path('tasks/', TaskList.as_view()),
-#     path('tasks/<int:pk>/', TaskDetails.as_view())
-# ]
+urlpatterns = [
+    path("register/", RegisterView.as_view())
+    # path('tasks/', TaskList.as_view()),
+    # path('tasks/<int:pk>/', TaskDetails.as_view())
+]
 
-urlpatterns = routers.urls
+urlpatterns += routers.urls

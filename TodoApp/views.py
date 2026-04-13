@@ -8,10 +8,13 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from .permission import IsOwner
+from .serializers import RegisterSerializer
+from rest_framework.generics import CreateAPIView
 
 # CRUD Start 
 
-
+class RegisterView(CreateAPIView):
+    serializer_class = RegisterSerializer
 
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()

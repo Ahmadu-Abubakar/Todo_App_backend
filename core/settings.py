@@ -30,7 +30,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 # https://todo-app-backend-xcfq.onrender.com   ==> my backend APIs address
 
-# Application definition
+
 
 
 

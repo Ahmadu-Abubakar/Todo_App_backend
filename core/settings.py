@@ -88,9 +88,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 
-DATABASE_URL=postgresql://todo_db_b7hf_user:P9y5JHGz2eNE1EafwtCuMyPOPDzTh1Pz@dpg-d7f9bj57vvec73a85pbg-a/todo_db_b7hf
-
-
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }

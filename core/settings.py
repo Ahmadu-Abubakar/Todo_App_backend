@@ -26,9 +26,18 @@ SECRET_KEY = 'django-insecure-5x@rvhvbm7+j+jq62fb6746tcmnke7_bh=tn@h&8dp23(gudwd
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-# https://todo-app-backend-xcfq.onrender.com
+# https://todo-app-backend-xcfq.onrender.com   ==> my backend APIs address
 
 # Application definition
+
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",  # 👈 add this
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',

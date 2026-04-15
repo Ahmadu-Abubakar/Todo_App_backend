@@ -17,6 +17,7 @@ class RegisterView(CreateAPIView):
     serializer_class = RegisterSerializer
 
 class TaskViewSet(ModelViewSet):
+    queryset = Task.objects.get.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated, IsOwner]
 

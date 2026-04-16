@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from .permission import IsOwner
 from .serializers import RegisterSerializer
 from rest_framework.generics import CreateAPIView
+from .pagination import TaskPagination
 
 # CRUD Start 
 
@@ -20,6 +21,7 @@ class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated, IsOwner]
+    pagination_class = TaskPagination
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)

@@ -24,6 +24,18 @@ class TaskViewSet(ModelViewSet):
     pagination_class = TaskPagination
 
     def get_queryset(self):
+        queryset = Task.objects.filter(user=self.request.user)
+
+        completed = self.request.query_params.get("status")
+        title = self.request.query_params.get('task')
+
+        if title:
+            queryset = queryset.filter(title_icontains=title)
+            return queryset
+
+        if completed is not None:
+            queryset = queryset.filter(status=completed)
+            return queryset
         return Task.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):

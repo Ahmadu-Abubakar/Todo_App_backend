@@ -28,12 +28,14 @@ class TaskViewSet(ModelViewSet):
 
         completed = self.request.query_params.get('completed')
         if completed is not None:
-            if completed.lower() == 'true':
-                queryset = queryset.filter(completed=True)
-            elif completed.lower() == 'false':
-                queryset = queryset.filter(completed=False)
-            queryset = queryset.filter(completed=completed)
+            if completed.lower() in ["true", "1"]:
+                completed = True
+            elif completed.lower() in ["false", "0"]:
+                completed = False
+            else:
+                raise ValidationError("Invalid boolean value")
 
+            queryset = queryset.filter(completed=completed)
         title = self.request.query_params.get('title')
         if title:
             queryset = queryset.filter(title__icontains=title)

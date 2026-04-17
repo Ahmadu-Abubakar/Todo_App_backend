@@ -28,7 +28,6 @@ class TaskViewSet(ModelViewSet):
 
         completed = self.request.query_params.get('completed')
         if completed is not None:
-            
             if completed.lower() == 'true':
                 queryset = queryset.filter(completed=True)
             elif completed.lower() == 'false':

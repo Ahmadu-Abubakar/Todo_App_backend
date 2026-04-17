@@ -27,16 +27,19 @@ class TaskViewSet(ModelViewSet):
         queryset = Task.objects.filter(user=self.request.user)
 
         completed = self.request.query_params.get('completed')
-        title = self.request.query_params.get('title')
-
-        if title:
-            queryset = queryset.filter(title_icontains=title)
-            return queryset
-
         if completed is not None:
+            
+            if completed.lower() == 'true':
+                queryset = queryset.filter(completed=True)
+            elif completed.lower() == 'false':
+                queryset = queryset.filter(completed=False)
             queryset = queryset.filter(completed=completed)
-            return queryset
-        return Task.objects.filter(user=self.request.user)
+
+        title = self.request.query_params.get('title')
+        if title:
+            queryset = queryset.filter(title__icontains=title)
+
+        return queryset.order_by('-id')  # 🔥 ADD THIS
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

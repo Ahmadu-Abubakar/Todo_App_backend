@@ -26,15 +26,15 @@ class TaskViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = Task.objects.filter(user=self.request.user)
 
-        completed = self.request.query_params.get("status")
-        title = self.request.query_params.get('task')
+        completed = self.request.query_params.get('completed')
+        title = self.request.query_params.get('title')
 
         if title:
             queryset = queryset.filter(title_icontains=title)
             return queryset
 
         if completed is not None:
-            queryset = queryset.filter(status=completed)
+            queryset = queryset.filter(completed=completed)
             return queryset
         return Task.objects.filter(user=self.request.user)
 

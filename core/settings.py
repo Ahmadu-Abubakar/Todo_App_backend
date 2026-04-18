@@ -14,10 +14,10 @@ from pathlib import Path
 import dj_database_url
 import os
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
 db_url = os.environ.get('DATABASE_URL')
 DATABASE_URL = os.environ.get('DATABASE_URL')

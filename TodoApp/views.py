@@ -21,7 +21,7 @@ class RegisterView(CreateAPIView):
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+    # permission_classes = [IsAuthenticated, IsOwner]
     pagination_class = TaskPagination
 
     # def get_queryset(self):

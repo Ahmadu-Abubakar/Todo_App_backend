@@ -11,6 +11,7 @@ from .permission import IsOwner
 from .serializers import RegisterSerializer
 from rest_framework.generics import CreateAPIView
 from .pagination import TaskPagination
+from rest_framework.exceptions import ValidationError
 
 # CRUD Start 
 
@@ -43,8 +44,12 @@ class TaskViewSet(ModelViewSet):
         completed = self.request.query_params.get("completed")
 
         if completed is not None:
-            completed = completed.lower() == "true"
-            queryset = queryset.filter(completed=completed)
+            if completed.lower() == "true":
+                completed = True
+            elif completed.lower() == "false":
+                completed = False
+            else:
+                raise ValidationError("Use true or false only")
 
     # return queryset
         title = self.request.query_params.get('title')

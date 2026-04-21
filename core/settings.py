@@ -58,8 +58,11 @@ ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",  # 👈 add this
+        "rest_framework.authentication.SessionAuthentication",  
         "rest_framework.authentication.TokenAuthentication",
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3  # you can change this
@@ -75,6 +78,7 @@ INSTALLED_APPS = [
     'TodoApp',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_filter',
 ]
 
 MIDDLEWARE = [

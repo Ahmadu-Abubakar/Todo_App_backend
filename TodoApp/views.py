@@ -12,6 +12,8 @@ from .serializers import RegisterSerializer
 from rest_framework.generics import CreateAPIView
 from .pagination import TaskPagination
 from rest_framework.exceptions import ValidationError
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 # CRUD Start 
 
@@ -23,6 +25,13 @@ class TaskViewSet(ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated, IsOwner]
     pagination_class = TaskPagination
+
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+
+    filterset_fields = ['completed'] 
+    search_fields = ['title']
+    Ordering_fields = ['id', 'title']
+
 
     # def get_queryset(self):
     #     queryset = Task.objects.filter(user=self.request.user)
@@ -41,22 +50,22 @@ class TaskViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = Task.objects.filter(user=self.request.user).order_by('-id')
 
-        completed = self.request.query_params.get("completed")
+    #     completed = self.request.query_params.get("completed")
 
-        if completed is not None:
-            if completed.lower() == "true":
-                completed = True
-            elif completed.lower() == "false":
-                completed = False
-            else:
-                raise ValidationError("Use true or false only")
+    #     if completed is not None:
+    #         if completed.lower() == "true":
+    #             completed = True
+    #         elif completed.lower() == "false":
+    #             completed = False
+    #         else:
+    #             raise ValidationError("Use true or false only")
 
-    # return queryset
-        title = self.request.query_params.get('title')
-        if title:
-            queryset = queryset.filter(title__icontains=title)
+    # # return queryset
+    #     title = self.request.query_params.get('title')
+    #     if title:
+    #         queryset = queryset.filter(title__icontains=title)
 
-        return queryset.order_by('-id')  # 🔥 ADD THIS
+    #     return queryset.order_by('-id')  # 🔥 ADD THIS
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

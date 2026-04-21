@@ -28,11 +28,15 @@ class TaskViewSet(ModelViewSet):
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
 
-    filterset_fields = ['completed'] 
+    filterset_fields = ['completed']
     search_fields = ['title']
-    Ordering_fields = ['id', 'title']
+    ordering_fields = ['id', 'title']
 
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
     # def get_queryset(self):
     #     queryset = Task.objects.filter(user=self.request.user)
 
@@ -47,8 +51,6 @@ class TaskViewSet(ModelViewSet):
 
     #         queryset = queryset.filter(completed=completed)
 
-    def get_queryset(self):
-        queryset = Task.objects.filter(user=self.request.user).order_by('-id')
 
     #     completed = self.request.query_params.get("completed")
 
@@ -66,9 +68,6 @@ class TaskViewSet(ModelViewSet):
     #         queryset = queryset.filter(title__icontains=title)
 
     #     return queryset.order_by('-id')  # 🔥 ADD THIS
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
     
 # class TestAuth(APIView):
 #     def get(self, request):

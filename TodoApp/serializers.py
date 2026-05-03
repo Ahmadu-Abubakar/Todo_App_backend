@@ -7,10 +7,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = "__all__"
         read_only_fields = ['user']
-        widgets = {
-            'time_created': forms.TimeInput(format='%H:%M'),
-        }
-
+       
 
 
 from django.contrib.auth.models import User

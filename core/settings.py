@@ -53,7 +53,8 @@ ALLOWED_HOSTS = ['*']
 # https://todo-app-backend-xcfq.onrender.com   ==> my backend APIs address
 
 
-
+TIME_FORMAT = 'g:i a'
+USE_L10N = False
 
 
 REST_FRAMEWORK = {
